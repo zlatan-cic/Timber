@@ -1,0 +1,11 @@
+.vs/
+*.exe
+*.dll
+*.pdb
+*.obj
+*.log
+*.suo
+*.user
+*.VC.db
+Debug/
+Release/
