@@ -1,6 +1,7 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <iostream>
 
+
 using namespace sf;
 
 int main()
@@ -123,8 +124,8 @@ int main()
 			beeSpede = (rand() % 200) + 200;
 
 			// How high is the bee
-			srand((int)time(0) * 10);
-			float height = (rand() % 500) + 500;
+			srand((int)time(0));
+			float height = (rand() % 500) + 600;
 			spriteBee.setPosition(2000, height);
 			beeActive = true;
 		}
@@ -132,7 +133,7 @@ int main()
 		/// move the bee
 		{
 			spriteBee.setPosition(
-				spriteBee.getPosition().x - 
+				spriteBee.getPosition().x -
 				(beeSpede * dt.asSeconds()),
 				spriteBee.getPosition().y);
 
@@ -167,6 +168,50 @@ int main()
 				cloud1Active = false;
 			}
 ;		}
+
+		//cloud 2
+		if (!cloud2Active)
+		{
+			// how fast is cloud1 going
+			srand((int)time(0) * 20);
+			cloud2Speed = (rand() % 200);
+
+			float height = (rand() % 300) - 150;
+			spriteCloud2.setPosition(-200, height);
+			cloud2Active = true;
+		} 
+		else
+		{
+			spriteCloud2.setPosition(
+				spriteCloud2.getPosition().x + (cloud2Speed * dt.asSeconds()), spriteCloud2.getPosition().y
+			);
+			if (spriteCloud2.getPosition().x > 1920)
+			{
+				cloud2Active = false;
+			}
+		}
+
+		// Cloud 3 
+		if (!cloud3Active)
+		{
+			srand((int)time(0) * 30);
+			cloud3Speed = (rand() % 200);
+
+			srand((int)time(0) % 200);
+			float height = (rand() % 450) - 150;
+			spriteCloud3.setPosition(-200, height);
+			cloud3Active = true;
+		}
+		else
+		{
+			spriteCloud3.setPosition(
+				spriteCloud3.getPosition().x + (cloud3Speed * dt.asSeconds()), spriteCloud3.getPosition().y
+			);
+			if (spriteCloud3.getPosition().x > 1920)
+			{
+				cloud3Active = false;
+			}
+		}
 		
 
 		// Clear everything from the last frame window.clear();
