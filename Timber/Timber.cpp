@@ -1,5 +1,6 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
 
 
 using namespace sf;
@@ -45,9 +46,18 @@ int main()
 	spriteTree.setTexture(textureTree);
 	spriteTree.setPosition(TREE_HORIZONTAL_POSITION, TREE_VERTICAL_POSITION);
 
-	// // // /// /// /// /// /// 
-	// Make a bee sprite // /// 
+	// // // /// BEE /// /// /// /// 
+	// 
+	// Making bee flay in wawes
+	// 
+	float beeX = 2000.0f;
+	float beeBaseHeight = 600.f;
+	float beeWaweAmplitude = 50.0f;
+	float beeWaweFrequency = 0.02f;
 
+
+
+	// Make a bee sprite // /// 
 	Texture textureBee;
 	textureBee.loadFromFile("graphics/bee.png");
 	Sprite spriteBee;
@@ -116,8 +126,9 @@ int main()
 
 		//Measure time
 		Time dt = clock.restart();
-		//Setap the bee
-		if (!beeActive)
+
+		/*Setap the bee*/
+		/*if (!beeActive)
 		{
 			//How fast will it go
 			srand((int)time(0));
@@ -141,6 +152,23 @@ int main()
 			if (spriteBee.getPosition().x < -100)
 			{
 				//Set it up to be a whole new bee next frame
+				beeActive = false;
+			}
+		}*/
+		if (!beeActive)
+		{
+			beeSpede = (rand() % 200) + 200;
+			beeBaseHeight = (rand() % 400) + 300;
+			beeX = 2000.0f;
+			beeActive = true;
+		}
+		else
+		{
+			beeX -= beeSpede * dt.asSeconds();
+			float beeY = beeWaweAmplitude * sin(beeWaweFrequency * beeX) + beeBaseHeight;
+			spriteBee.setPosition(beeX, beeY);
+			if (beeX < -100)
+			{
 				beeActive = false;
 			}
 		}
